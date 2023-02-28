@@ -9,7 +9,6 @@ const CartWidget = () => {
     edge="start"
     color="inherit"
     aria-label="cart"
-    sx={{ mr: 2 }}
     >
     <div className="d-flex justify-content-center">
         <ShoppingCartIcon /> : 1

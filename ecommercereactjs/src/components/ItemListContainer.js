@@ -1,12 +1,56 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-const ItemListContainer = (props) => {
-  return (
-    <div>
-      <h1>Hola, {props.greeting}!</h1>
-      <p>Bienvenido a la tienda.</p>
-    </div>
-  );
+const categories = {
+  "categories": [
+    {
+      "id": 1,
+      "name": "Mangas",
+    },
+    {
+      "id": 2,
+      "name": "Comics",
+    },
+  ]
 };
 
-export default ItemListContainer;
+export default function BasicMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        sx={{ color: 'white' }}
+      >
+        Catalogos
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        {categories.categories.map(category => (
+          <MenuItem key={category.id} onClick={handleClose}> {category.name} </MenuItem>
+        ))}
+      </Menu>
+    </div>
+  );
+}
