@@ -2,16 +2,19 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
 const categories = {
   "categories": [
     {
       "id": 1,
       "name": "Mangas",
+      "route": "/category/01",
     },
     {
       "id": 2,
       "name": "Comics",
+      "route": "/category/01",
     },
   ]
 };
@@ -47,9 +50,11 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        {categories.categories.map(category => (
-          <MenuItem key={category.id} onClick={handleClose}> {category.name} </MenuItem>
-        ))}
+        {categories.categories.map(category => {
+          return (
+            <MenuItem component={Link} key={category.id} onClick={handleClose} to={`/category/${category.id}`}> {category.name} </MenuItem>
+          );
+        })}
       </Menu>
     </div>
   );
